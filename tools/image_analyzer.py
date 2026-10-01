@@ -59,7 +59,7 @@ class ImageAnalyzer:
                 "model_status": "not_loaded"
             }
 
-        # The trained model inference will be implemented here.
+        
         return {
             "status": "success",
             "tool": self.name

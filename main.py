@@ -1,4 +1,3 @@
-
 from agent.agent import MehAIAgent
 
 
@@ -26,6 +25,29 @@ def display_response(response):
     if "intent" in response:
         print("Intent:", response["intent"])
 
+    if "ai_tool" in response:
+        print("AI Tool:", response["ai_tool"])
+
+    if "approved" in response:
+        print("Approved:", response["approved"])
+
+    if "detections" in response:
+        print("Detections:", response["detections"])
+
+    if "risk" in response:
+        risk = response["risk"]
+
+        print()
+        print("Risk Factors:")
+
+        for factor in risk.factors:
+            print("-", factor)
+
+    if "decision" in response:
+        decision = response["decision"]
+
+        print("Decision:", decision.action)
+
 
 def main():
     agent = MehAIAgent()
@@ -44,15 +66,32 @@ def main():
         response = agent.process_request(user_request)
 
         if response["status"] == "input_required":
+
             print()
             print("MehAI:", response["message"])
 
-            text_to_scan = input("Text: ")
+            if response["intent"] == "ai_usage_analysis":
 
-            response = agent.process_request(
-                user_request,
-                text_to_scan
-            )
+                ai_tool = input("AI Tool: ").strip()
+
+                text_to_scan = input(
+                    "Content to share: "
+                ).strip()
+
+                response = agent.process_request(
+                    user_request,
+                    text_to_scan=text_to_scan,
+                    ai_tool=ai_tool
+                )
+
+            else:
+
+                text_to_scan = input("Text: ")
+
+                response = agent.process_request(
+                    user_request,
+                    text_to_scan=text_to_scan
+                )
 
         display_response(response)
 

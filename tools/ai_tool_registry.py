@@ -1,7 +1,11 @@
 class AIToolRegistry:
     """
-    Maintains information about AI tools that can be assessed
-    by the MehAI risk engine.
+    Registry of AI tools that MehAI can assess.
+
+    Each tool contains:
+    - name
+    - approval status
+    - base risk
     """
 
     def __init__(self):
@@ -13,6 +17,7 @@ class AIToolRegistry:
                 "approved": True,
                 "base_risk": 10
             },
+
             "unknown_ai": {
                 "name": "Unknown AI Tool",
                 "approved": False,
@@ -21,9 +26,6 @@ class AIToolRegistry:
         }
 
     def get_tool(self, tool_id):
-        """
-        Retrieve information about an AI tool.
-        """
 
         if not tool_id:
             return {
@@ -31,9 +33,12 @@ class AIToolRegistry:
                 "message": "No AI tool identifier was provided."
             }
 
-        tool = self.tools.get(tool_id.lower())
+        tool_id = tool_id.strip().lower()
+
+        tool = self.tools.get(tool_id)
 
         if tool is None:
+
             return {
                 "status": "success",
                 "tool_id": tool_id,
@@ -49,8 +54,4 @@ class AIToolRegistry:
         }
 
     def list_tools(self):
-        """
-        Return the currently registered AI tools.
-        """
-
         return self.tools
