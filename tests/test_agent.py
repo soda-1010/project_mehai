@@ -1,9 +1,6 @@
 from agent.agent import MehAIAgent
 
 
-# ============================================================
-# APPROVED AI + PUBLIC CONTENT
-# ============================================================
 
 def test_approved_ai_public_content():
 
@@ -29,9 +26,7 @@ def test_approved_ai_public_content():
     assert response["decision"].action == "ALLOW"
 
 
-# ============================================================
-# APPROVED AI + SENSITIVE CONTENT
-# ============================================================
+
 
 def test_approved_ai_sensitive_content():
 
@@ -61,9 +56,7 @@ def test_approved_ai_sensitive_content():
     assert response["decision"].action == "WARN"
 
 
-# ============================================================
-# UNAPPROVED AI + PUBLIC CONTENT
-# ============================================================
+
 
 def test_unapproved_ai_public_content():
 
@@ -89,9 +82,7 @@ def test_unapproved_ai_public_content():
     assert response["decision"].action == "WARN"
 
 
-# ============================================================
-# UNAPPROVED AI + SENSITIVE CONTENT
-# ============================================================
+
 
 def test_unapproved_ai_sensitive_content():
 
@@ -127,9 +118,7 @@ def test_unapproved_ai_sensitive_content():
     assert response["decision"].action == "BLOCK"
 
 
-# ============================================================
-# POLICY ENGINE — LOW RISK
-# ============================================================
+
 
 def test_policy_engine_low_risk():
 
@@ -147,9 +136,6 @@ def test_policy_engine_low_risk():
     assert decision.requires_confirmation is False
 
 
-# ============================================================
-# POLICY ENGINE — MEDIUM RISK
-# ============================================================
 
 def test_policy_engine_medium_risk():
 
@@ -170,9 +156,6 @@ def test_policy_engine_medium_risk():
     assert decision.requires_confirmation is False
 
 
-# ============================================================
-# POLICY ENGINE — CRITICAL RISK
-# ============================================================
 
 def test_policy_engine_critical_risk():
 
